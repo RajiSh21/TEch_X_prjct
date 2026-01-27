@@ -42,9 +42,12 @@ export const AuthProvider = ({ children }) => {
       
       return { success: true };
     } catch (error) {
+      console.error('[AUTH CONTEXT] Login error:', error.response?.data || error.message);
+      
       return {
         success: false,
-        message: error.response?.data?.message || 'Login failed'
+        message: error.response?.data?.message || 'Login failed. Please try again.',
+        errors: error.response?.data?.errors || {}
       };
     }
   };
@@ -62,9 +65,12 @@ export const AuthProvider = ({ children }) => {
       
       return { success: true };
     } catch (error) {
+      console.error('[AUTH CONTEXT] Registration error:', error.response?.data || error.message);
+      
       return {
         success: false,
-        message: error.response?.data?.message || 'Registration failed'
+        message: error.response?.data?.message || 'Registration failed. Please try again.',
+        errors: error.response?.data?.errors || {}
       };
     }
   };
