@@ -14,6 +14,7 @@ import JobsScreen from '../screens/JobsScreen';
 import InterviewsScreen from '../screens/InterviewsScreen';
 import NotificationsScreen from '../screens/NotificationsScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import ScraperScreen from '../screens/ScraperScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -46,6 +47,8 @@ export function MainTabs() {
             iconName = focused ? 'briefcase' : 'briefcase-outline';
           } else if (route.name === 'Interviews') {
             iconName = focused ? 'calendar' : 'calendar-outline';
+          } else if (route.name === 'FindJobs') {
+            iconName = focused ? 'search-circle' : 'search-circle-outline';
           } else if (route.name === 'Profile') {
             iconName = focused ? 'person' : 'person-outline';
           }
@@ -89,6 +92,11 @@ export function MainTabs() {
         name="Jobs" 
         component={JobsScreen}
         options={{ title: 'Job Listings' }}
+      />
+      <Tab.Screen 
+        name="FindJobs" 
+        component={ScraperScreen}
+        options={{ title: 'Find Jobs' }}
       />
       <Tab.Screen 
         name="Interviews" 

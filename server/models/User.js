@@ -50,7 +50,14 @@ const userSchema = new mongoose.Schema({
     skills: [String],
     resume: String,
     linkedIn: String,
-    github: String
+    github: String,
+    // Location fields for web scraping
+    city: String,
+    state: String,
+    country: {
+      type: String,
+      default: 'India'
+    }
   },
   preferences: {
     jobTypes: [String],
