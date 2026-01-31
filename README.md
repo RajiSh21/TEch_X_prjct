@@ -262,8 +262,6 @@ Always verify you have permission before scraping any website.
 
 ## General Requirements
 
-## General Requirements
-
 - Python 3.7+
 - requests
 - beautifulsoup4

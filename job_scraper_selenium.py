@@ -318,28 +318,28 @@ class JobScraper:
                     try:
                         title_elem = card.find_element(By.CSS_SELECTOR, title_selector)
                         job_data['title'] = title_elem.text.strip()
-                    except:
+                    except (NoSuchElementException, Exception):
                         job_data['title'] = "N/A"
                     
                     # Extract company
                     try:
                         company_elem = card.find_element(By.CSS_SELECTOR, company_selector)
                         job_data['company'] = company_elem.text.strip()
-                    except:
+                    except (NoSuchElementException, Exception):
                         job_data['company'] = "N/A"
                     
                     # Extract location
                     try:
                         location_elem = card.find_element(By.CSS_SELECTOR, location_selector)
                         job_data['location'] = location_elem.text.strip()
-                    except:
+                    except (NoSuchElementException, Exception):
                         job_data['location'] = "N/A"
                     
                     # Extract link
                     try:
                         link_elem = card.find_element(By.CSS_SELECTOR, link_selector)
                         job_data['link'] = link_elem.get_attribute("href")
-                    except:
+                    except (NoSuchElementException, Exception):
                         job_data['link'] = "N/A"
                     
                     if job_data.get('title') != "N/A":
