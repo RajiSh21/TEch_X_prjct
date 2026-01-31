@@ -8,7 +8,7 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import csv
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Union, Any
 from urllib.parse import urljoin, urlparse
 import time
 
@@ -128,7 +128,7 @@ class WebScraper:
                 rows.append(cells)
         return rows
     
-    def save_to_json(self, data: any, filename: str):
+    def save_to_json(self, data: Union[Dict, List], filename: str):
         """Save data to a JSON file."""
         with open(filename, 'w', encoding='utf-8') as f:
             json.dump(data, f, indent=2, ensure_ascii=False)
