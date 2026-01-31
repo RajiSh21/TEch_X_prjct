@@ -9,10 +9,13 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import os
 import sys
+import secrets
 
 # Create Flask app
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your-secret-key-change-in-production'
+
+# Security: Use environment variable for secret key, or generate a random one
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', secrets.token_hex(32))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///placement_opportunities.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -210,4 +213,6 @@ if __name__ == '__main__':
     print("\nPress Ctrl+C to stop the server")
     print("=" * 70 + "\n")
     
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # Use debug mode only in development
+    debug_mode = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
+    app.run(debug=debug_mode, host='0.0.0.0', port=5000)
