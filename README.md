@@ -1,11 +1,70 @@
 # TEch_X_prjct
 
-## Web Scraping Python Programs
+## Web Scraping & Placement Portal
 
-A comprehensive collection of Python web scraping tools:
+A comprehensive collection of Python web scraping tools with an integrated web application for managing placement and internship opportunities:
 
 1. **BeautifulSoup Scraper** (`web_scraper.py`) - Lightweight scraper for static content
 2. **Selenium Job Scraper** (`job_scraper_selenium.py`) - Advanced scraper with proxy support for dynamic job sites
+3. **🆕 Placement Portal** (`app.py`) - Web application to display and manage scraped job opportunities
+
+---
+
+## 🎓 Placement & Internship Portal (NEW!)
+
+A Flask-based web application that integrates with the job scraper to provide a user-friendly interface for browsing placement and internship opportunities.
+
+### Quick Start
+
+1. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. **Run the application:**
+   ```bash
+   python app.py
+   ```
+
+3. **Open in browser:**
+   ```
+   http://127.0.0.1:5000
+   ```
+
+### Features
+
+- 🌐 **Web Dashboard**: Clean, modern interface for browsing jobs
+- 💼 **Placement Opportunities**: View full-time job openings
+- 🎯 **Internship Opportunities**: Explore internship positions  
+- 🔍 **Integrated Scraper**: Scrape jobs directly from the web interface
+- 💾 **Database Storage**: SQLite database for persistent storage
+- 📊 **Statistics**: View opportunity counts and trends
+- 🗑️ **Job Management**: Remove outdated opportunities
+
+### Portal Structure
+
+```
+app.py                      # Main Flask application
+job_scraper_integration.py  # Scraper-database integration
+templates/
+  ├── base.html            # Base template
+  ├── index.html           # Home page
+  ├── placements.html      # Placements listing
+  ├── internships.html     # Internships listing
+  └── scrape.html          # Scraper interface
+placement_opportunities.db  # SQLite database (auto-created)
+```
+
+### Usage Example
+
+1. Navigate to http://127.0.0.1:5000
+2. Click "Scrape Jobs" 
+3. Enter search criteria (e.g., "Python Developer" in "Berlin, Germany")
+4. Select job type (Placement or Internship)
+5. Click "Start Scraping"
+6. View results in Placements or Internships section
+
+For detailed instructions, see [PLACEMENT_APP_GUIDE.md](PLACEMENT_APP_GUIDE.md)
 
 ---
 

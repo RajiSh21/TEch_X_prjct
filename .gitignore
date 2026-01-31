@@ -15,11 +15,16 @@ env/
 *.csv
 scraped_data/
 
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
 # IDE
 .vscode/
 .idea/
 *.swp
-*.swo
+.*.swo
 *~
 
 # OS
