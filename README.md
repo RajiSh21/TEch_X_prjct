@@ -1,16 +1,60 @@
 # TEch_X_prjct
 
-## Web Scraping & Placement Portal
+## Web Scraping, Placement Portal & Mobile App
 
-A comprehensive collection of Python web scraping tools with an integrated web application for managing placement and internship opportunities:
+A comprehensive platform for job scraping and placement management with web and mobile interfaces:
 
 1. **BeautifulSoup Scraper** (`web_scraper.py`) - Lightweight scraper for static content
 2. **Selenium Job Scraper** (`job_scraper_selenium.py`) - Advanced scraper with proxy support for dynamic job sites
-3. **🆕 Placement Portal** (`app.py`) - Web application to display and manage scraped job opportunities
+3. **🌐 Placement Portal** (`app.py`) - Flask web application to display and manage scraped job opportunities
+4. **📱 Mobile App** (`mobile/`) - React Native mobile application for iOS and Android
 
 ---
 
-## 🎓 Placement & Internship Portal (NEW!)
+## 📱 Mobile App (NEW!)
+
+A React Native mobile application that connects to the Flask backend to browse placements and internships on your phone.
+
+### Quick Start - Mobile App
+
+1. **Start the Flask backend:**
+   ```bash
+   python app.py
+   ```
+
+2. **Setup mobile app:**
+   ```bash
+   cd mobile
+   npm install
+   ```
+
+3. **Run on Android:**
+   ```bash
+   npm run android
+   ```
+
+4. **Run on iOS (macOS only):**
+   ```bash
+   npm run ios
+   ```
+
+### Open in VS Code
+
+Open the workspace file for a multi-folder setup:
+```bash
+code placement-portal.code-workspace
+```
+
+This workspace includes:
+- 🎓 Root project folder
+- 📱 Mobile app folder
+- 🌐 Flask backend folder
+
+For more details, see [mobile/README.md](mobile/README.md)
+
+---
+
+## 🎓 Placement & Internship Portal (Web)
 
 A Flask-based web application that integrates with the job scraper to provide a user-friendly interface for browsing placement and internship opportunities.
 

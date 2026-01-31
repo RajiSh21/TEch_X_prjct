@@ -30,3 +30,26 @@ scraped_data/
 # OS
 .DS_Store
 Thumbs.db
+
+# React Native / Mobile
+mobile/node_modules/
+mobile/ios/Pods/
+mobile/ios/build/
+mobile/android/app/build/
+mobile/android/.gradle/
+mobile/.expo/
+mobile/.expo-shared/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
+# Metro
+.metro-health-check*
+
+# Temporary files
+*.tmp
+*.temp
