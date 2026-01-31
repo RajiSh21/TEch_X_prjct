@@ -10,6 +10,7 @@ import csv
 import time
 import random
 from typing import List, Dict, Optional
+from urllib.parse import urlparse
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
@@ -258,11 +259,24 @@ class JobScraper:
             try:
                 link_elem = card.find_element(By.CSS_SELECTOR, "h2.jobTitle a")
                 job_link = link_elem.get_attribute("href")
-                # Clean up the link
-                if job_link and 'indeed.com' in job_link:
-                    job_data['link'] = job_link
+                # Clean up the link - ensure it's a valid Indeed URL
+                if job_link:
+                    # Parse URL to check domain properly using urlparse
+                    # This extracts only the network location (domain) for validation
+                    parsed = urlparse(job_link)
+                    # Check if it's already a full Indeed URL with proper domain
+                    # Using netloc.endswith() is safe here as netloc contains only the domain,
+                    # not path or query parameters. This prevents malicious URLs like
+                    # "https://evil.com/indeed.com" from passing validation.
+                    if parsed.netloc and parsed.netloc.endswith('indeed.com'):
+                        job_data['link'] = job_link
+                    elif job_link.startswith('/'):
+                        # Relative URL - prepend Indeed domain
+                        job_data['link'] = f"https://www.indeed.com{job_link}"
+                    else:
+                        job_data['link'] = job_link  # Keep as-is if uncertain
                 else:
-                    job_data['link'] = f"https://www.indeed.com{job_link}" if job_link else "N/A"
+                    job_data['link'] = "N/A"
             except NoSuchElementException:
                 job_data['link'] = "N/A"
             
