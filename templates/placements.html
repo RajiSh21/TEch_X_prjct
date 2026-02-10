@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block title %}Placement Opportunities{% endblock %}
+
+{% block content %}
+<style>
+    .page-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    
+    .page-header h1 {
+        font-size: 36px;
+        color: #667eea;
+        margin-bottom: 10px;
+    }
+    
+    .job-list {
+        display: grid;
+        gap: 20px;
+    }
+    
+    .job-item {
+        background: #f8f9fa;
+        padding: 25px;
+        border-radius: 8px;
+        border-left: 5px solid #667eea;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.3s;
+    }
+    
+    .job-item:hover {
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transform: translateY(-2px);
+    }
+    
+    .job-info {
+        flex: 1;
+    }
+    
+    .job-info h3 {
+        color: #333;
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+    
+    .job-info .company {
+        font-weight: bold;
+        color: #667eea;
+        margin-bottom: 5px;
+        font-size: 16px;
+    }
+    
+    .job-info .location {
+        color: #666;
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+    
+    .job-info .date {
+        color: #999;
+        font-size: 12px;
+    }
+    
+    .job-actions {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .pagination {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 30px;
+    }
+    
+    .pagination a {
+        padding: 8px 15px;
+        background: #667eea;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background 0.3s;
+    }
+    
+    .pagination a:hover {
+        background: #5568d3;
+    }
+    
+    .pagination .disabled {
+        background: #ccc;
+        pointer-events: none;
+    }
+    
+    .no-jobs {
+        text-align: center;
+        padding: 60px 20px;
+        color: #666;
+    }
+    
+    .no-jobs h2 {
+        margin-bottom: 15px;
+    }
+</style>
+
+<div class="page-header">
+    <h1>💼 Placement Opportunities</h1>
+    <p>{{ jobs.total }} placement opportunities available</p>
+</div>
+
+{% if jobs.items %}
+<div class="job-list">
+    {% for job in jobs.items %}
+    <div class="job-item">
+        <div class="job-info">
+            <h3>{{ job.title }}</h3>
+            <div class="company">🏢 {{ job.company }}</div>
+            <div class="location">📍 {{ job.location }}</div>
+            <div class="date">Added: {{ job.date_added.strftime('%B %d, %Y') }}</div>
+        </div>
+        <div class="job-actions">
+            <a href="{{ job.link }}" target="_blank" class="btn">Apply Now</a>
+            <form method="POST" action="{{ url_for('delete_job', job_id=job.id) }}" style="display: inline;">
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Remove this job?')">Remove</button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="pagination">
+    {% if jobs.has_prev %}
+        <a href="{{ url_for('placements', page=jobs.prev_num) }}">← Previous</a>
+    {% else %}
+        <a class="disabled">← Previous</a>
+    {% endif %}
+    
+    <span style="padding: 8px 15px; background: white; border-radius: 5px;">
+        Page {{ jobs.page }} of {{ jobs.pages }}
+    </span>
+    
+    {% if jobs.has_next %}
+        <a href="{{ url_for('placements', page=jobs.next_num) }}">Next →</a>
+    {% else %}
+        <a class="disabled">Next →</a>
+    {% endif %}
+</div>
+{% else %}
+<div class="no-jobs">
+    <h2>No Placement Opportunities Yet</h2>
+    <p>Start by scraping some job postings!</p>
+    <a href="{{ url_for('scrape') }}" class="btn" style="margin-top: 20px;">Scrape Jobs</a>
+</div>
+{% endif %}
+{% endblock %}
